@@ -644,3 +644,14 @@ ul {
     transform: none;
   }
 }
+
+/* Section Loading State */
+.section-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+  color: var(--text-secondary, #8892b0);
+  font-size: 0.9rem;
+  opacity: 0.6;
+}
