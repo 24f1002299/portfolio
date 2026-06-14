@@ -399,6 +399,58 @@ section {
   .project-card.featured { grid-column: span 1; }
 }
 
+/* Course Projects Row — spans full width, 2-up side by side */
+.course-projects-row {
+  grid-column: 1 / -1;
+}
+
+.course-projects-label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-sm);
+}
+
+.course-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.3rem 0.85rem;
+  background: linear-gradient(135deg, rgba(46,196,182,0.15), rgba(46,196,182,0.05));
+  border: 1px solid rgba(46,196,182,0.3);
+  color: var(--sea-green);
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: var(--radius-xl);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.course-badge svg {
+  width: 13px;
+  height: 13px;
+  stroke: var(--sea-green);
+  flex-shrink: 0;
+}
+
+.course-divider {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, rgba(46,196,182,0.25), transparent);
+}
+
+.course-projects-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+}
+
+@media (max-width: 900px) {
+  .course-projects-pair { grid-template-columns: 1fr; }
+}
+
+
 .project-image { position: relative; height: 200px; overflow: hidden; }
 .project-card.featured .project-image { height: 280px; }
 
