@@ -8,28 +8,28 @@
 /* ── Design Tokens ────────────────────────────────── */
 :root {
   /* Backgrounds */
-  --bg-base:     #070A0F;
-  --bg-surface:  #0D1117;
-  --bg-elevated: #161B22;
-  --bg-overlay:  #1C2128;
+  --bg-base:     #f4f4ef;
+  --bg-surface:  #ffffff;
+  --bg-elevated: #ecece6;
+  --bg-overlay:  #e2e2da;
 
   /* Accent: Cyan (primary) */
-  --cyan:        #00D4AA;
+  --cyan:        #171716;
   --cyan-dim:    rgba(0, 212, 170, 0.10);
   --cyan-glow:   rgba(0, 212, 170, 0.22);
   --cyan-border: rgba(0, 212, 170, 0.28);
 
   /* Accent: Violet (secondary) */
-  --violet:        #7C5CFC;
+  --violet:        #5e5e59;
   --violet-dim:    rgba(124, 92, 252, 0.10);
   --violet-glow:   rgba(124, 92, 252, 0.22);
   --violet-border: rgba(124, 92, 252, 0.28);
 
   /* Text */
-  --text-primary:   #F5F7FA;
-  --text-secondary: #C9D1D9;
-  --text-muted:     #8B949E;
-  --text-faint:     #3D444D;
+  --text-primary:   #171716;
+  --text-secondary: #4e4e49;
+  --text-muted:     #6e6e68;
+  --text-faint:     #94948c;
 
   /* Borders */
   --border:        rgba(255, 255, 255, 0.06);

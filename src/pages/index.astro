@@ -1,38 +1,227 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Nav from '../components/Nav.astro';
-import Hero from '../components/Hero.astro';
-import CredibilityStrip from '../components/CredibilityStrip.astro';
-import WhatIBuild from '../components/WhatIBuild.astro';
-import AISystemMap from '../components/AISystemMap.astro';
-import FeaturedProjects from '../components/FeaturedProjects.astro';
-import ProjectFilter from '../components/ProjectFilter.astro';
-import Journey from '../components/Journey.astro';
-import Experience from '../components/Experience.astro';
-import Skills from '../components/Skills.astro';
-import Certifications from '../components/Certifications.astro';
-import Exploring from '../components/Exploring.astro';
-import About from '../components/About.astro';
-import Contact from '../components/Contact.astro';
-import Footer from '../components/Footer.astro';
+import { featuredProjects, selectedProjects } from '../data/projects';
+import { experiences } from '../data/experience';
+
+const base = `${import.meta.env.BASE_URL}/`;
 ---
 
-<Layout>
-  <Nav />
-  <main id="main-content">
-    <Hero />
-    <CredibilityStrip />
-    <WhatIBuild />
-    <AISystemMap />
-    <FeaturedProjects />
-    <ProjectFilter />
-    <Journey />
-    <Experience />
-    <Skills />
-    <Certifications />
-    <Exploring />
-    <About />
-    <Contact />
+<Layout title="Hasrat Hussain — AI/ML Engineer" description="Hasrat Hussain is an AI/ML engineer building practical machine-learning systems and reliable software.">
+  <header class="site-header">
+    <div class="shell nav">
+      <a class="wordmark" href={base} aria-label="Hasrat Hussain — home">H.H</a>
+      <nav aria-label="Main navigation">
+        <a href="#work">Work</a>
+        <a href="#experience">Experience</a>
+        <a href="#about">About</a>
+      </nav>
+      <a class="email-link" href="mailto:hasratmd697@gmail.com">Let’s talk <span aria-hidden="true">↗</span></a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero shell">
+      <p class="eyebrow">Portfolio / 2026</p>
+      <h1>Building useful<br />systems with AI.</h1>
+      <div class="hero-bottom">
+        <p class="lede">I’m Hasrat Hussain, an AI/ML engineer focused on agents, machine learning, and the dependable software around them.</p>
+        <div class="hero-links">
+          <a class="button button-dark" href="#work">View selected work</a>
+          <a class="text-link" href="https://github.com/24f1002299" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+      <div class="hero-note"><span class="status-dot" aria-hidden="true"></span> Open to AI/ML and software engineering opportunities</div>
+    </section>
+
+    <section class="statement">
+      <div class="shell statement-inner">
+        <p>From research experiments to products people can actually use.</p>
+        <span>AI agents · ML systems · backend engineering</span>
+      </div>
+    </section>
+
+    <section class="section shell" id="work" aria-labelledby="work-title">
+      <div class="section-intro">
+        <p class="eyebrow">01 / Selected work</p>
+        <h2 id="work-title">A few things I’ve built.</h2>
+        <p>Each project starts with a concrete problem, then becomes a system that can be evaluated, used, and improved.</p>
+      </div>
+
+      <div class="feature-grid">
+        {featuredProjects.map((project, index) => (
+          <article class={`feature feature-${index + 1}`}>
+            <div class="feature-number">0{index + 1}</div>
+            <div class="feature-content">
+              <p class="project-kind">{project.category.join(' / ')} · {project.year}</p>
+              <h3>{project.title}</h3>
+              <p>{project.problem}</p>
+              <p class="result"><span>Result</span>{project.result}</p>
+              <div class="tags" aria-label={`${project.title} technologies`}>
+                {project.stack.map((tech) => <span>{tech}</span>)}
+              </div>
+              <a class="project-link" href={project.github} target="_blank" rel="noopener noreferrer">Read project <span aria-hidden="true">↗</span></a>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <div class="archive">
+        <div class="archive-heading">
+          <p class="eyebrow">Project archive</p>
+          <p>More experiments across ML, GenAI, and full-stack systems.</p>
+        </div>
+        <ol>
+          {selectedProjects.map((project) => (
+            <li>
+              <a href={project.github} target="_blank" rel="noopener noreferrer">
+                <span class="archive-title">{project.title}</span>
+                <span class="archive-type">{project.category.join(' · ')}</span>
+                <span class="archive-result">{project.result}</span>
+                <span aria-hidden="true">↗</span>
+              </a>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <section class="section section-tint" id="experience" aria-labelledby="experience-title">
+      <div class="shell">
+        <div class="section-intro compact">
+          <p class="eyebrow">02 / Experience</p>
+          <h2 id="experience-title">Learning in public,<br />shipping in teams.</h2>
+        </div>
+        <div class="roles">
+          {experiences.map((role) => (
+            <article class="role">
+              <p class="role-period">{role.period}</p>
+              <div>
+                <h3>{role.title}</h3>
+                <p class="role-company">{role.company} <span>·</span> {role.location}</p>
+              </div>
+              <ul>
+                {role.achievements.slice(0, 2).map((achievement) => <li>{achievement}</li>)}
+              </ul>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section shell about" id="about" aria-labelledby="about-title">
+      <div class="section-intro compact">
+        <p class="eyebrow">03 / About</p>
+        <h2 id="about-title">Curious about how things work. Serious about making them work.</h2>
+      </div>
+      <div class="about-copy">
+        <p>I study Data Science at IIT Madras and build at the intersection of machine learning and software engineering. I enjoy the full problem: forming an idea, evaluating a model, and packaging the result into something dependable.</p>
+        <p>Right now, I’m exploring agentic systems, reinforcement learning, GPU programming, and inference optimisation.</p>
+        <div class="skill-list" aria-label="Core skills">
+          <span>Python</span><span>PyTorch</span><span>RAG</span><span>FastAPI</span><span>Django</span><span>Docker</span><span>PostgreSQL</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="contact" aria-labelledby="contact-title">
+      <div class="shell contact-inner">
+        <p class="eyebrow">04 / Contact</p>
+        <h2 id="contact-title">Let’s make something<br />worth using.</h2>
+        <div>
+          <a class="contact-email" href="mailto:hasratmd697@gmail.com">hasratmd697@gmail.com <span aria-hidden="true">↗</span></a>
+          <p>Samastipur, Bihar, India</p>
+          <div class="contact-links">
+            <a href="https://github.com/24f1002299" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a href="https://www.linkedin.com/in/hasrat-hussain-08b637233/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a href={`${base}assets/resume.pdf`} download>Résumé</a>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
-  <Footer />
+
+  <footer class="footer shell"><span>© 2026 Hasrat Hussain</span><span>Designed and built with care.</span></footer>
 </Layout>
+
+<style>
+  :global(body) { background: #f4f4ef; color: #171716; }
+  :global(html) { scroll-padding-top: 4rem; }
+  .shell { width: min(1180px, calc(100% - 3rem)); margin: 0 auto; }
+  .site-header { position: sticky; top: 0; z-index: 10; background: rgba(244,244,239,.93); backdrop-filter: blur(12px); border-bottom: 1px solid #d9d9d1; }
+  .nav { min-height: 4.5rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+  .wordmark { font-family: var(--font-display); font-weight: 700; font-size: 1.2rem; letter-spacing: -.07em; }
+  nav { display: flex; gap: 1.7rem; }
+  nav a, .email-link { font-size: .86rem; color: #62625c; }
+  nav a:hover, .email-link:hover { color: #171716; }
+  .email-link { border-bottom: 1px solid currentColor; padding-bottom: .1rem; }
+  .hero { min-height: min(760px, calc(100svh - 4.5rem)); display: flex; flex-direction: column; justify-content: center; padding-block: 5rem 3rem; }
+  .eyebrow { font-size: .72rem; text-transform: uppercase; letter-spacing: .12em; font-weight: 700; color: #6e6e68; }
+  h1, h2, h3, p { margin: 0; }
+  h1 { max-width: 920px; margin: 1.35rem 0 3.7rem; font: 600 clamp(3.45rem, 8.2vw, 7.7rem)/.91 var(--font-display); letter-spacing: -.075em; }
+  .hero-bottom { display: flex; align-items: flex-end; justify-content: space-between; gap: 2rem; }
+  .lede { max-width: 440px; color: #54544f; font-size: clamp(1rem, 1.4vw, 1.2rem); line-height: 1.55; }
+  .hero-links { display: flex; align-items: center; gap: 1.7rem; flex-wrap: wrap; }
+  .button { display: inline-block; padding: .88rem 1.15rem; font-size: .85rem; font-weight: 650; }
+  .button-dark { background: #171716; color: #f4f4ef; }
+  .text-link, .project-link { font-size: .85rem; font-weight: 650; border-bottom: 1px solid #171716; padding-bottom: .18rem; }
+  .hero-note { margin-top: 5rem; color: #6e6e68; font-size: .79rem; }
+  .status-dot { display: inline-block; width: .55rem; height: .55rem; margin-right: .45rem; border-radius: 50%; background: #44735c; }
+  .statement { background: #171716; color: #f4f4ef; }
+  .statement-inner { min-height: 9.5rem; display: flex; align-items: center; justify-content: space-between; gap: 2rem; }
+  .statement p { font: 500 clamp(1.45rem, 2.4vw, 2.4rem)/1.1 var(--font-display); letter-spacing: -.04em; max-width: 600px; }
+  .statement span { color: #c4c4bc; font-size: .78rem; text-transform: uppercase; letter-spacing: .1em; }
+  .section { padding-block: 8rem; }
+  .section-intro { display: grid; grid-template-columns: 1fr 2fr; gap: 2rem; margin-bottom: 4rem; }
+  .section-intro h2 { font: 500 clamp(2.2rem, 4.3vw, 4.4rem)/.98 var(--font-display); letter-spacing: -.065em; }
+  .section-intro > p:last-child { align-self: end; max-width: 420px; color: #62625c; line-height: 1.6; }
+  .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid #cecec7; }
+  .feature { min-height: 520px; padding: 1.25rem 1.15rem 1.3rem; border-right: 1px solid #cecec7; display: flex; flex-direction: column; }
+  .feature:first-child { border-left: 1px solid #cecec7; }
+  .feature-number { color: #85857e; font: .8rem var(--font-display); }
+  .feature-content { margin-top: auto; }
+  .project-kind { font-size: .7rem; color: #6e6e68; text-transform: uppercase; letter-spacing: .08em; }
+  .feature h3 { margin: .55rem 0 1rem; font: 500 clamp(1.5rem, 2.2vw, 2.25rem)/1 var(--font-display); letter-spacing: -.05em; }
+  .feature-content > p:not(.project-kind):not(.result) { color: #575750; font-size: .92rem; line-height: 1.55; min-height: 5.1rem; }
+  .result { padding: .85rem 0; margin-top: 1rem; border-top: 1px solid #cecec7; font-size: .8rem; line-height: 1.45; font-weight: 650; }
+  .result span { display: block; margin-bottom: .25rem; color: #777770; font-weight: 500; text-transform: uppercase; letter-spacing: .08em; font-size: .65rem; }
+  .tags, .skill-list { display: flex; flex-wrap: wrap; gap: .4rem; margin: .75rem 0 1.25rem; }
+  .tags span, .skill-list span { padding: .28rem .5rem; border: 1px solid #cecec7; color: #595953; font-size: .68rem; }
+  .archive { margin-top: 8rem; border-top: 1px solid #cecec7; }
+  .archive-heading { display: flex; justify-content: space-between; gap: 2rem; padding: 1.15rem 0 2rem; }
+  .archive-heading > p:last-child { color: #62625c; font-size: .88rem; }
+  .archive ol { list-style: none; padding: 0; border-top: 1px solid #cecec7; }
+  .archive li { border-bottom: 1px solid #cecec7; }
+  .archive li a { padding: 1rem 0; display: grid; grid-template-columns: 1.3fr .65fr 1.4fr auto; gap: 1rem; align-items: center; }
+  .archive li a:hover { padding-inline: .5rem; background: #ebeae4; }
+  .archive-title { font: 500 1.12rem var(--font-display); letter-spacing: -.03em; }
+  .archive-type, .archive-result { color: #6e6e68; font-size: .75rem; }
+  .section-tint { background: #e7e6df; }
+  .compact { grid-template-columns: 1fr 2fr; }
+  .roles { border-top: 1px solid #c6c5bd; }
+  .role { display: grid; grid-template-columns: .7fr 1.25fr 2fr; gap: 2rem; padding: 2rem 0; border-bottom: 1px solid #c6c5bd; }
+  .role-period, .role-company, .role li { font-size: .82rem; color: #676760; line-height: 1.55; }
+  .role h3 { font: 500 1.3rem var(--font-display); letter-spacing: -.035em; margin-bottom: .35rem; }
+  .role ul { padding: 0; margin: 0; list-style: none; }
+  .role li { position: relative; padding-left: 1rem; margin-bottom: .32rem; }
+  .role li::before { content: '—'; position: absolute; left: 0; }
+  .about { display: grid; grid-template-columns: 1.3fr 1fr; gap: 4rem; }
+  .about .section-intro { display: block; margin: 0; }
+  .about .section-intro h2 { margin-top: 1.1rem; }
+  .about-copy { color: #55554f; font-size: 1.05rem; line-height: 1.7; padding-top: 1.5rem; }
+  .about-copy p + p { margin-top: 1.25rem; }
+  .contact { background: #d7ff3f; padding-block: 7rem; }
+  .contact-inner { display: grid; grid-template-columns: 1fr 2fr 1.2fr; gap: 2rem; align-items: end; }
+  .contact h2 { font: 500 clamp(2.5rem, 4.6vw, 4.8rem)/.95 var(--font-display); letter-spacing: -.07em; }
+  .contact-email { display: inline-block; font: 500 1.1rem var(--font-display); border-bottom: 1px solid currentColor; padding-bottom: .25rem; }
+  .contact p:not(.eyebrow) { color: #4d5b18; font-size: .8rem; margin-top: 1rem; }
+  .contact-links { display: flex; gap: 1rem; margin-top: 1.45rem; }
+  .contact-links a { font-size: .77rem; font-weight: 650; border-bottom: 1px solid currentColor; }
+  .footer { display: flex; justify-content: space-between; padding-block: 1.2rem; color: #6e6e68; font-size: .73rem; }
+  @media (max-width: 760px) {
+    .shell { width: min(100% - 2rem, 1180px); } nav { gap: .9rem; } .email-link { display: none; }
+    .hero { min-height: 640px; padding-block: 4rem 2rem; } h1 { margin-bottom: 2.8rem; } .hero-bottom, .statement-inner, .archive-heading { align-items: flex-start; flex-direction: column; }
+    .section { padding-block: 5rem; } .section-intro, .compact, .about { display: block; } .section-intro > p:last-child { margin-top: 1.25rem; }
+    .feature-grid { grid-template-columns: 1fr; } .feature { min-height: 390px; border-left: 1px solid #cecec7; border-bottom: 1px solid #cecec7; } .feature-content > p:not(.project-kind):not(.result) { min-height: auto; }
+    .archive { margin-top: 5rem; } .archive li a { grid-template-columns: 1fr auto; } .archive-type, .archive-result { display: none; }
+    .roles { margin-top: 3rem; } .role { grid-template-columns: 1fr; gap: .7rem; } .contact-inner { grid-template-columns: 1fr; align-items: start; gap: 2rem; }
+  }
+</style>
