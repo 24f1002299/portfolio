@@ -291,9 +291,13 @@ svg { flex-shrink: 0; }
 
 /* ── Scroll Reveal ────────────────────────────────── */
 .reveal {
+  opacity: 1;
+  transform: none;
+  transition: opacity 0.65s var(--ease), transform 0.65s var(--ease);
+}
+.js .reveal {
   opacity: 0;
   transform: translateY(22px);
-  transition: opacity 0.65s var(--ease), transform 0.65s var(--ease);
 }
 .reveal.visible { opacity: 1; transform: none; }
 .reveal-d1 { transition-delay: 0.08s; }
