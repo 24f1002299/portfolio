@@ -1,0 +1,103 @@
+---
+const exploring = [
+  'CUDA',
+  'GPU Programming',
+  'LLM Systems',
+  'Distributed Training',
+  'Inference Optimization',
+  'RL / GRPO',
+  'Agentic Systems',
+  'Model Evaluation',
+  'Quantization',
+  'vLLM',
+];
+---
+
+<section class="section exploring-section" id="exploring" aria-labelledby="exploring-heading">
+  <div class="container">
+    <div class="exploring-inner">
+      <div class="section-header reveal" style="margin-bottom: 0;">
+        <span class="section-tag">Currently Exploring</span>
+        <h2 class="section-title" id="exploring-heading" style="font-size: var(--text-2xl);">
+          What's <span class="title-accent">Next</span>
+        </h2>
+        <p class="section-subtitle">
+          Rather than pretending to master everything — here's where I'm headed.
+        </p>
+      </div>
+
+      <div class="exploring-tags reveal reveal-d2" role="list" aria-label="Topics currently being explored">
+        {exploring.map((tag, i) => (
+          <span
+            class="explore-tag"
+            role="listitem"
+            style={`animation-delay: ${i * 0.06}s`}
+          >
+            <span class="explore-dot" aria-hidden="true"></span>
+            {tag}
+          </span>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .exploring-section {
+    background: var(--bg-base);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .exploring-inner {
+    display: grid;
+    grid-template-columns: 340px 1fr;
+    gap: var(--s-12);
+    align-items: center;
+  }
+
+  .exploring-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-3);
+  }
+
+  .explore-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-2);
+    padding: 0.5rem 1rem;
+    background: var(--bg-surface);
+    color: var(--text-secondary);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    border: 1px solid var(--border);
+    border-radius: var(--r-full);
+    cursor: default;
+    transition: all var(--t-base);
+    animation: fadeIn 0.5s var(--ease) both;
+  }
+  .explore-tag:hover {
+    background: var(--cyan-dim);
+    color: var(--cyan);
+    border-color: var(--cyan-border);
+    transform: translateY(-2px);
+  }
+
+  .explore-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--cyan);
+    border-radius: 50%;
+    opacity: 0.7;
+    flex-shrink: 0;
+    transition: opacity var(--t-fast);
+  }
+  .explore-tag:hover .explore-dot { opacity: 1; }
+
+  @media (max-width: 768px) {
+    .exploring-inner { grid-template-columns: 1fr; gap: var(--s-8); }
+    .section-header  { text-align: center; }
+    .exploring-tags  { justify-content: center; }
+  }
+</style>

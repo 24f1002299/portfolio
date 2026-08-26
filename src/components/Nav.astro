@@ -1,0 +1,301 @@
+---
+const base = `${import.meta.env.BASE_URL}/`;
+---
+
+<header>
+  <a href="#main-content" class="skip-nav-link">Skip to content</a>
+  <nav class="navbar" id="navbar" aria-label="Main navigation">
+    <div class="nav-container">
+      <!-- Logo -->
+      <a href={`${base}`} class="nav-logo" aria-label="Hasrat Hussain — home">
+        <span class="logo-bracket">&lt;</span>HH<span class="logo-bracket">/&gt;</span>
+      </a>
+
+      <!-- Desktop links -->
+      <ul class="nav-links" role="list">
+        <li><a href="#hero"       class="nav-link">Home</a></li>
+        <li><a href="#work"       class="nav-link">Work</a></li>
+        <li><a href="#experience" class="nav-link">Experience</a></li>
+        <li><a href="#skills"     class="nav-link">Skills</a></li>
+        <li><a href="#about"      class="nav-link">About</a></li>
+        <li><a href="#contact"    class="nav-link">Contact</a></li>
+      </ul>
+
+      <!-- Resume CTA + mobile toggle -->
+      <div class="nav-actions">
+        <a
+          href={`${base}assets/resume.pdf`}
+          class="btn-resume"
+          aria-label="Download resume PDF"
+          download
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+            <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+          </svg>
+          Resume
+        </a>
+
+        <button
+          class="hamburger"
+          id="nav-toggle"
+          aria-label="Open navigation menu"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+        >
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile menu -->
+    <div class="mobile-menu" id="mobile-menu" role="dialog" aria-label="Mobile navigation" hidden>
+      <ul role="list">
+        <li><a href="#hero"       class="mobile-link">Home</a></li>
+        <li><a href="#work"       class="mobile-link">Work</a></li>
+        <li><a href="#experience" class="mobile-link">Experience</a></li>
+        <li><a href="#skills"     class="mobile-link">Skills</a></li>
+        <li><a href="#about"      class="mobile-link">About</a></li>
+        <li><a href="#contact"    class="mobile-link">Contact</a></li>
+        <li>
+          <a href={`${base}assets/resume.pdf`} class="mobile-resume" download>
+            Download Resume ↓
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>
+
+<style>
+  /* ── Skip link inside nav ─── */
+  .skip-nav-link {
+    position: absolute;
+    left: -9999px;
+    top: auto;
+    width: 1px; height: 1px;
+    overflow: hidden;
+  }
+
+  /* ── Navbar shell ─────────── */
+  .navbar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    padding: 0;
+    background: rgba(7, 10, 15, 0.72);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid transparent;
+    transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
+  }
+  .navbar.scrolled {
+    background: rgba(7, 10, 15, 0.95);
+    border-bottom-color: var(--border);
+    box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+  }
+
+  /* ── Container ───────────── */
+  .nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--s-6);
+    height: 72px;
+  }
+
+  /* ── Logo ────────────────── */
+  .nav-logo {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--text-primary);
+    transition: opacity 0.2s;
+  }
+  .nav-logo:hover { opacity: 0.8; }
+  .logo-bracket { color: var(--cyan); }
+
+  /* ── Desktop links ───────── */
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: var(--s-8);
+    list-style: none;
+  }
+
+  .nav-link {
+    position: relative;
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--text-muted);
+    transition: color var(--t-fast);
+    padding-bottom: 2px;
+  }
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px; left: 0;
+    width: 0; height: 2px;
+    background: var(--cyan);
+    border-radius: 1px;
+    transition: width var(--t-base);
+  }
+  .nav-link:hover       { color: var(--text-primary); }
+  .nav-link:hover::after,
+  .nav-link.active::after { width: 100%; }
+  .nav-link.active { color: var(--text-primary); }
+
+  /* ── Actions ─────────────── */
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--s-4);
+  }
+
+  /* ── Resume button ────────── */
+  .btn-resume {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.5rem 1.125rem;
+    background: var(--cyan-dim);
+    color: var(--cyan);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    border: 1px solid var(--cyan-border);
+    border-radius: var(--r-md);
+    transition: background var(--t-fast), box-shadow var(--t-fast);
+    white-space: nowrap;
+  }
+  .btn-resume:hover {
+    background: rgba(0, 212, 170, 0.18);
+    box-shadow: 0 0 16px var(--cyan-glow);
+  }
+
+  /* ── Hamburger ────────────── */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 36px; height: 36px;
+    padding: 6px;
+    border-radius: var(--r-sm);
+    transition: background var(--t-fast);
+  }
+  .hamburger:hover { background: var(--bg-elevated); }
+  .bar {
+    display: block;
+    width: 20px; height: 2px;
+    background: var(--text-secondary);
+    border-radius: 1px;
+    transition: transform 0.3s, opacity 0.3s;
+    transform-origin: center;
+  }
+  .hamburger[aria-expanded="true"] .bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger[aria-expanded="true"] .bar:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .hamburger[aria-expanded="true"] .bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* ── Mobile menu ─────────── */
+  .mobile-menu {
+    border-top: 1px solid var(--border);
+    background: rgba(7, 10, 15, 0.97);
+    backdrop-filter: blur(16px);
+    padding: var(--s-6) var(--s-6) var(--s-8);
+    animation: fadeInUp 0.2s var(--ease);
+  }
+  .mobile-menu[hidden] { display: none; }
+  .mobile-menu ul { display: flex; flex-direction: column; gap: var(--s-1); }
+
+  .mobile-link {
+    display: block;
+    padding: var(--s-3) 0;
+    font-size: var(--text-lg);
+    font-weight: 500;
+    color: var(--text-secondary);
+    border-bottom: 1px solid var(--border);
+    transition: color var(--t-fast);
+  }
+  .mobile-link:hover { color: var(--cyan); }
+
+  .mobile-resume {
+    display: block;
+    margin-top: var(--s-6);
+    padding: var(--s-4);
+    text-align: center;
+    background: var(--cyan-dim);
+    color: var(--cyan);
+    font-weight: 600;
+    font-size: var(--text-base);
+    border: 1px solid var(--cyan-border);
+    border-radius: var(--r-md);
+  }
+
+  @media (max-width: 768px) {
+    .nav-links  { display: none; }
+    .hamburger  { display: flex; }
+    .btn-resume { display: none; }
+    .nav-container { padding: 0 var(--s-4); height: 64px; }
+  }
+</style>
+
+<script>
+  // ── Scroll effect ─────────────────────────────────
+  const navbar = document.getElementById('navbar');
+  const onScroll = () => {
+    navbar?.classList.toggle('scrolled', window.scrollY > 40);
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  // ── Mobile menu toggle ────────────────────────────
+  const toggle  = document.getElementById('nav-toggle') as HTMLButtonElement;
+  const menu    = document.getElementById('mobile-menu') as HTMLDivElement;
+
+  toggle?.addEventListener('click', () => {
+    const open = toggle.getAttribute('aria-expanded') === 'true';
+    toggle.setAttribute('aria-expanded', String(!open));
+    menu.hidden = open;
+    if (!open) toggle.setAttribute('aria-label', 'Close navigation menu');
+    else        toggle.setAttribute('aria-label', 'Open navigation menu');
+  });
+
+  // Close on mobile link click
+  menu?.querySelectorAll('a').forEach(link =>
+    link.addEventListener('click', () => {
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.setAttribute('aria-label', 'Open navigation menu');
+      menu.hidden = true;
+    })
+  );
+
+  // ── Active link highlighting ───────────────────────
+  const sections  = document.querySelectorAll('section[id]');
+  const navLinks  = document.querySelectorAll('.nav-link');
+
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        navLinks.forEach(l => l.classList.remove('active'));
+        const active = document.querySelector(`.nav-link[href="#${e.target.id}"]`);
+        active?.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+
+  sections.forEach(s => obs.observe(s));
+
+  // ── Smooth scroll ─────────────────────────────────
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', (e) => {
+      const href = anchor.getAttribute('href');
+      if (href && href !== '#') {
+        e.preventDefault();
+        document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+</script>

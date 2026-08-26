@@ -1,0 +1,280 @@
+---
+// Journey.astro — Technical timeline
+const years = [
+  {
+    year: '2024',
+    side: 'right',
+    title: 'Data Science Foundations',
+    items: [
+      'Enrolled in IIT Madras BS in Data Science programme',
+      'First engineering internship at Bajaj Auto Ltd',
+      'Built first full-stack application — Flight Booking System with Django',
+    ],
+    tags: ['Python', 'Django', 'PostgreSQL', 'Data Science'],
+  },
+  {
+    year: '2025',
+    side: 'left',
+    title: 'ML, Full-Stack & GenAI',
+    items: [
+      'Built Audio Classifier CNN with ResNet + Next.js dashboard',
+      'Developed LLM semantic book recommender and F1 RAG chatbot',
+      'Created Describe2Deploy: NL → deployed web app via GPT-4o',
+      'Python Developer at Infosys Springboard',
+      'WebOps Technical Team Member at IIT Madras',
+    ],
+    tags: ['PyTorch', 'LangChain', 'RAG', 'Next.js', 'FastAPI'],
+  },
+  {
+    year: '2026',
+    side: 'right',
+    title: 'AI Agents, RL & Responsible AI',
+    items: [
+      'Built ModelCardAudit-Env — RL agent for responsible AI auditing using GRPO',
+      'Multi-agent data analysis system using AutoGen with Docker sandbox',
+      'CrewAI 5-agent customer support pipeline with RAG',
+      'Computer vision: cGAN super-resolution and Medical AI for NIH ChestX-ray',
+      'IIT Madras competition projects in NLP and Audio ML',
+    ],
+    tags: ['GRPO / RL', 'AutoGen', 'CrewAI', 'OpenEnv', 'PyTorch', 'cGAN'],
+  },
+];
+---
+
+<section class="section journey-section" id="journey" aria-labelledby="journey-heading">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-tag">Timeline</span>
+      <h2 class="section-title" id="journey-heading">
+        Technical <span class="title-accent">Journey</span>
+      </h2>
+      <p class="section-subtitle">
+        From data science foundations to frontier AI engineering — one project at a time.
+      </p>
+    </div>
+
+    <div class="timeline" role="list">
+      {years.map((y, i) => (
+        <div class={`tl-item reveal reveal-d${i + 1}`} role="listitem" data-side={y.side}>
+          <!-- Year marker -->
+          <div class="tl-year" aria-label={`Year ${y.year}`}>
+            <span class="year-num">{y.year}</span>
+            <div class="year-dot" aria-hidden="true"></div>
+          </div>
+
+          <!-- Card -->
+          <article class="tl-card glass">
+            <h3 class="tl-title">{y.title}</h3>
+            <ul class="tl-list" aria-label={`${y.year} highlights`}>
+              {y.items.map(item => (
+                <li class="tl-item-text">
+                  <span class="tl-bullet" aria-hidden="true">▸</span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+            <div class="tech-tags tl-tags">
+              {y.tags.map(t => <span class="tech-tag">{t}</span>)}
+            </div>
+          </article>
+        </div>
+      ))}
+
+      <!-- NOW -->
+      <div class="tl-now reveal">
+        <div class="now-line" aria-hidden="true"></div>
+        <span class="now-label">
+          <span class="now-dot" aria-hidden="true"></span>
+          NOW — Building frontier AI engineering skills
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .journey-section { background: var(--bg-base); }
+
+  /* ── Timeline ─────────────────────────────────────── */
+  .timeline {
+    position: relative;
+    max-width: 880px;
+    margin: 0 auto;
+  }
+
+  /* Vertical line */
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0; bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, var(--cyan-border) 10%, var(--cyan-border) 90%, transparent);
+    transform: translateX(-50%);
+  }
+
+  /* ── Item ─────────────────────────────────────────── */
+  .tl-item {
+    display: grid;
+    grid-template-columns: 1fr 56px 1fr;
+    gap: 0;
+    margin-bottom: var(--s-8);
+    align-items: start;
+  }
+
+  /* Year marker */
+  .tl-year {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--s-2);
+    padding-top: var(--s-4);
+    grid-column: 2;
+    position: relative;
+    z-index: 1;
+  }
+
+  .year-num {
+    font-family: var(--font-display);
+    font-size: var(--text-sm);
+    font-weight: 700;
+    color: var(--cyan);
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+  }
+
+  .year-dot {
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: var(--bg-base);
+    border: 2px solid var(--cyan);
+    box-shadow: 0 0 0 4px var(--cyan-dim);
+    animation: pulse-cyan 3s ease-in-out infinite;
+  }
+
+  /* Card placement */
+  .tl-item[data-side="right"] .tl-card { grid-column: 3; grid-row: 1; margin-left: var(--s-6); }
+  .tl-item[data-side="left"]  .tl-card { grid-column: 1; grid-row: 1; margin-right: var(--s-6); text-align: right; }
+  .tl-item[data-side="left"] .tl-list  { text-align: left; }
+
+  .tl-year { grid-column: 2; grid-row: 1; }
+
+  /* Card */
+  .tl-card {
+    padding: var(--s-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-4);
+    transition: transform var(--t-base), border-color var(--t-base);
+  }
+  .tl-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--cyan-border);
+  }
+
+  .tl-title {
+    font-size: var(--text-lg);
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+  }
+
+  .tl-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-2);
+    list-style: none;
+  }
+
+  .tl-item-text {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--s-2);
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  .tl-bullet {
+    color: var(--cyan);
+    flex-shrink: 0;
+    margin-top: 0.1em;
+    font-size: 0.7em;
+  }
+
+  .tl-tags { flex-wrap: wrap; }
+
+  /* ── NOW ──────────────────────────────────────────── */
+  .tl-now {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--s-3);
+    margin-top: var(--s-4);
+  }
+
+  .now-line {
+    width: 1px;
+    height: 32px;
+    background: linear-gradient(to bottom, var(--cyan-border), transparent);
+  }
+
+  .now-label {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-2);
+    padding: 0.5rem 1.25rem;
+    background: var(--cyan-dim);
+    border: 1px solid var(--cyan-border);
+    border-radius: var(--r-full);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--cyan);
+    letter-spacing: 0.01em;
+  }
+
+  .now-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--cyan);
+    animation: pulse-dot 2s ease-in-out infinite;
+    flex-shrink: 0;
+  }
+  @keyframes pulse-dot {
+    0%, 100% { box-shadow: 0 0 0 3px var(--cyan-dim); }
+    50%       { box-shadow: 0 0 0 7px transparent; }
+  }
+
+  /* ── Responsive ───────────────────────────────────── */
+  @media (max-width: 768px) {
+    .timeline::before { left: 20px; }
+
+    .tl-item {
+      grid-template-columns: 48px 1fr;
+      grid-template-rows: auto;
+      gap: 0;
+    }
+
+    .tl-year {
+      grid-column: 1;
+      grid-row: 1;
+      flex-direction: row;
+      align-items: center;
+      padding-top: var(--s-4);
+      gap: var(--s-2);
+    }
+
+    .year-num { font-size: var(--text-xs); writing-mode: horizontal-tb; }
+
+    .tl-item[data-side="right"] .tl-card,
+    .tl-item[data-side="left"]  .tl-card {
+      grid-column: 2;
+      grid-row: 1;
+      margin-left: var(--s-4);
+      margin-right: 0;
+      text-align: left;
+    }
+
+    .tl-item[data-side="left"] .tl-list { text-align: left; }
+  }
+</style>

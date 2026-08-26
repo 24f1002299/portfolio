@@ -1,0 +1,154 @@
+---
+// WhatIBuild.astro
+const builds = [
+  {
+    accent: 'cyan',
+    label: '01',
+    title: 'Intelligent Systems',
+    desc: 'Multi-agent systems, RAG pipelines, LLM-powered apps and tool-using AI that solves real problems.',
+    skills: ['AI Agents', 'RAG', 'LLMs', 'Tool Use', 'AutoGen', 'CrewAI'],
+    icon: `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+      <circle cx="12" cy="12" r="3"/>
+      <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+    </svg>`,
+  },
+  {
+    accent: 'violet',
+    label: '02',
+    title: 'ML Systems',
+    desc: 'End-to-end training pipelines, model evaluation, computer vision, NLP and audio classification.',
+    skills: ['PyTorch', 'Computer Vision', 'Audio ML', 'NLP', 'Scikit-learn', 'Kaggle'],
+    icon: `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+      <path d="M2 20h20M5 20V10M9 20V4M13 20V14M17 20V8M21 20V2"/>
+    </svg>`,
+  },
+  {
+    accent: 'cyan',
+    label: '03',
+    title: 'Production Software',
+    desc: 'Robust REST APIs, containerised services, CI/CD pipelines and full-stack applications that ship.',
+    skills: ['FastAPI', 'Django', 'PostgreSQL', 'Docker', 'GitHub Actions', 'Next.js'],
+    icon: `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+      <rect x="2" y="3" width="20" height="14" rx="2"/>
+      <path d="M8 21h8M12 17v4"/>
+      <path d="M7 8h2M11 8h6M7 12h4"/>
+    </svg>`,
+  },
+];
+---
+
+<section class="section" id="what-i-build" aria-labelledby="wib-heading">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-tag">What I Build</span>
+      <h2 class="section-title" id="wib-heading">
+        Engineering <span class="title-accent">Identity</span>
+      </h2>
+      <p class="section-subtitle">
+        Three domains where my work lives — from research-grade AI to production-ready software.
+      </p>
+    </div>
+
+    <div class="wib-grid">
+      {builds.map((b, i) => (
+        <article
+          class={`wib-card glass reveal reveal-d${i + 1}`}
+          data-accent={b.accent}
+        >
+          <div class="wib-top">
+            <span class="wib-num">{b.label}</span>
+            <div class={`wib-icon icon-${b.accent}`} aria-hidden="true" set:html={b.icon}/>
+          </div>
+          <h3 class={`wib-title text-${b.accent}`}>{b.title}</h3>
+          <p class="wib-desc">{b.desc}</p>
+          <div class="wib-skills" role="list" aria-label={`${b.title} technologies`}>
+            {b.skills.map(s => (
+              <span class="tech-tag" role="listitem">{s}</span>
+            ))}
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .wib-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--s-6);
+  }
+
+  .wib-card {
+    padding: var(--s-8);
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-4);
+    position: relative;
+    overflow: hidden;
+  }
+  .wib-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    border-radius: var(--r-lg) var(--r-lg) 0 0;
+    opacity: 0;
+    transition: opacity var(--t-base);
+  }
+  .wib-card[data-accent="cyan"]::before { background: linear-gradient(90deg, transparent, var(--cyan), transparent); }
+  .wib-card[data-accent="violet"]::before { background: linear-gradient(90deg, transparent, var(--violet), transparent); }
+  .wib-card:hover::before { opacity: 1; }
+  .wib-card:hover { transform: translateY(-4px); }
+
+  /* Top row */
+  .wib-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .wib-num {
+    font-family: var(--font-display);
+    font-size: var(--text-xs);
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--text-faint);
+  }
+
+  .wib-icon {
+    width: 48px; height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--r-md);
+    flex-shrink: 0;
+  }
+  .icon-cyan   { background: var(--cyan-dim);   color: var(--cyan);   border: 1px solid var(--cyan-border); }
+  .icon-violet { background: var(--violet-dim); color: var(--violet); border: 1px solid var(--violet-border); }
+
+  .wib-title {
+    font-size: var(--text-xl);
+    font-weight: 700;
+    letter-spacing: -0.025em;
+  }
+
+  .wib-desc {
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+    line-height: 1.7;
+    flex: 1;
+  }
+
+  .wib-skills { display: flex; flex-wrap: wrap; gap: var(--s-2); }
+
+  @media (max-width: 1024px) {
+    .wib-grid { grid-template-columns: 1fr 1fr; }
+    .wib-card:last-child { grid-column: span 2; }
+  }
+  @media (max-width: 640px) {
+    .wib-grid { grid-template-columns: 1fr; }
+    .wib-card:last-child { grid-column: span 1; }
+    .wib-card { padding: var(--s-6); }
+  }
+</style>

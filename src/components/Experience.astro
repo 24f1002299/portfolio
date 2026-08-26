@@ -1,0 +1,174 @@
+---
+import { experiences } from '../data/experience';
+---
+
+<section class="section experience-section" id="experience" aria-labelledby="exp-heading">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-tag">Experience</span>
+      <h2 class="section-title" id="exp-heading">
+        Work <span class="title-accent">Experience</span>
+      </h2>
+    </div>
+
+    <div class="exp-list">
+      {experiences.map((e, i) => (
+        <article class={`exp-card glass reveal reveal-d${i + 1}`}>
+          <!-- Left: Icon -->
+          <div class={`exp-icon icon-${e.accent}`} aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              {e.accent === 'cyan' && (
+                <><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></>
+              )}
+              {e.accent === 'violet' && (
+                <><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></>
+              )}
+              {e.accent === 'neutral' && (
+                <><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8"/></>
+              )}
+            </svg>
+          </div>
+
+          <!-- Right: Content -->
+          <div class="exp-content">
+            <div class="exp-header">
+              <div>
+                <h3 class="exp-title">{e.title}</h3>
+                <p class="exp-company">{e.company} · {e.type}</p>
+              </div>
+              <div class="exp-meta">
+                <span class={`exp-period text-${e.accent === 'neutral' ? 'muted' : e.accent}`}>{e.period}</span>
+                <span class="exp-location">{e.location}</span>
+              </div>
+            </div>
+
+            <ul class="exp-achievements" aria-label="Key achievements">
+              {e.achievements.map(a => (
+                <li>
+                  <span class="ach-bullet" aria-hidden="true">▸</span>
+                  {a}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .experience-section { background: var(--bg-surface); }
+
+  .exp-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-6);
+    max-width: 880px;
+    margin: 0 auto;
+  }
+
+  .exp-card {
+    display: flex;
+    gap: var(--s-6);
+    padding: var(--s-6);
+    transition: transform var(--t-base), border-color var(--t-base);
+  }
+  .exp-card:hover {
+    transform: translateX(4px);
+    border-color: var(--border-strong);
+  }
+
+  /* Icon */
+  .exp-icon {
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--r-md);
+    flex-shrink: 0;
+  }
+  .icon-cyan    { background: var(--cyan-dim);   color: var(--cyan);    border: 1px solid var(--cyan-border); }
+  .icon-violet  { background: var(--violet-dim); color: var(--violet);  border: 1px solid var(--violet-border); }
+  .icon-neutral { background: var(--bg-overlay); color: var(--text-muted); border: 1px solid var(--border); }
+
+  /* Content */
+  .exp-content { flex: 1; min-width: 0; }
+
+  .exp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: var(--s-3);
+    margin-bottom: var(--s-4);
+  }
+
+  .exp-title {
+    font-size: var(--text-lg);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+  }
+
+  .exp-company {
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+  }
+
+  .exp-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.25rem;
+  }
+
+  .exp-period {
+    font-size: var(--text-xs);
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    white-space: nowrap;
+  }
+
+  .exp-location {
+    font-size: var(--text-xs);
+    color: var(--text-faint);
+    white-space: nowrap;
+  }
+
+  .text-cyan   { color: var(--cyan); }
+  .text-violet { color: var(--violet); }
+  .text-muted  { color: var(--text-muted); }
+
+  /* Achievements */
+  .exp-achievements {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-2);
+    list-style: none;
+  }
+
+  .exp-achievements li {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--s-2);
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+    line-height: 1.65;
+  }
+
+  .ach-bullet {
+    color: var(--cyan);
+    flex-shrink: 0;
+    margin-top: 0.2em;
+    font-size: 0.7em;
+  }
+
+  @media (max-width: 640px) {
+    .exp-card { flex-direction: column; }
+    .exp-header { flex-direction: column; }
+    .exp-meta { align-items: flex-start; }
+  }
+</style>
